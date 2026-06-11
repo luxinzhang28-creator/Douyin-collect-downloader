@@ -24,8 +24,8 @@
 ### 安装
 
 ```bash
-git clone https://github.com/你的用户名/douyin-collect-downloader.git
-cd douyin-collect-downloader
+git clone https://github.com/luxinzhang28-creator/Douyin-collect-downloader.git
+cd Douyin-collect-downloader
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
