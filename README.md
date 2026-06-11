@@ -1,152 +1,146 @@
-# 抖音收藏夹知识库流水线
+# Douyin Collect Downloader
 
-> **把收藏夹里的碎片内容，变成可以复盘、搜索、总结和二次创作的个人知识资产。**
+**抖音收藏夹批量下载与视频转文字工具。**
 
-批量下载抖音收藏夹 → 提取口播文案 → 导出结构化日志，方便导入 Obsidian、Notion 或交给 AI 做总结分析。
+本项目用于将抖音收藏夹、收藏视频保存到本地，并提取视频口播文案，生成结构化日志，方便后续进行**素材整理、内容运营分析、选题研究**或**个人知识库沉淀**。
+
+> 它不是一个「自动生成知识库」的工具，而是一个面向资料整理的**前置处理工具**。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](requirements.txt)
+[![Python](https://img.shields.io/badge/Python-3.10%20recommended-blue.svg)](requirements.txt)
 
----
-
-## 这个项目解决什么痛点？
-
-很多人收藏了大量学习、创业、AI、商业类短视频，但这些内容：
-
-- 散落在抖音收藏夹里，**很难系统复盘**
-- 标题看过就忘，**口播干货无法搜索**
-- 想导入笔记软件或交给 AI 总结时，**缺少结构化本地资料**
-
-本项目希望把抖音收藏夹中的**视频、封面、音频、标题、元数据和口播文案**沉淀为本地资料，构建个人知识库流水线。
-
-## Demo
-
-> 截图可替换为你自己的运行结果，建议保留终端下载、输出目录、知识库三视图。
-
-![下载运行截图](./img/DouYinCommanddownload.jpg)
-
-![下载详情](./img/DouYinCommanddownloaddetail.jpg)
-
-## 完整工作流
+## 工作流程
 
 ```
-Douyin 收藏夹
+抖音收藏夹 / 视频链接
     ↓
-download_collects.py  批量下载
+批量下载视频、封面、音乐、元数据
     ↓
-视频 / 封面 / 音频 / 元数据
+提取视频口播文案
     ↓
-extract_transcript.py  提取口播文案
+生成 CSV / JSON / TXT
     ↓
-CSV / JSON / TXT
-    ↓
-Obsidian / AI 总结 / 知识图谱
+导入 Obsidian / Notion / Excel / AI 工具继续整理
 ```
 
-## ✨ 核心功能（相比原版新增）
+## 适用人群
+
+- 想**备份和整理**抖音收藏夹的用户
+- **短视频运营、内容运营、素材分析**人员
+- 想研究爆款视频**标题、口播、选题结构**的人
+- 想把视频内容**转成文字资料**的人
+- 想把收藏内容**沉淀为个人知识库**的人
+
+## 核心功能
 
 | 功能 | 说明 |
 |------|------|
-| 📁 收藏夹批量下载 | `download_collects.py` 支持按收藏夹、全部收藏、交互选择 |
-| 🎙️ 口播文案提取 | `extract_transcript.py` 支持 Vosk / Faster-Whisper |
-| 📊 结构化日志 | 自动生成 CSV + JSON，便于后续知识库整理 |
-| 🍪 Cookie 工具 | 自动/手动获取 Cookie，详见 `USAGE.md` |
+| 收藏夹批量下载 | 支持下载收藏夹内容、收藏视频，并生成下载日志 |
+| 视频转文字 | 支持 Vosk / Faster-Whisper 提取口播文案 |
+| 结构化日志 | 自动生成 CSV / JSON，方便筛选、统计和整理 |
+| Cookie 获取工具 | 支持自动获取和手动填写 Cookie |
+| 本地资料整理 | 可作为 Obsidian、Notion、Excel、AI 总结工具的前置流程 |
 
-## 🚀 快速开始
+## 推荐环境
 
-### 环境要求
+**推荐使用 Python 3.10**
 
-- Python 3.8+（Vosk）或 Python 3.9+（Whisper）
-- Windows / macOS / Linux
+最低可用环境：
 
-### 安装
+| 场景 | Python 版本 |
+|------|------------|
+| 仅下载 + Vosk 转写 | 3.8+ |
+| Faster-Whisper 转写 | 3.9+ |
+| **新手推荐** | **3.10** |
+
+## 快速开始
+
+### 1. 克隆项目
 
 ```bash
 git clone https://github.com/luxinzhang28-creator/Douyin-collect-downloader.git
 cd Douyin-collect-downloader
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-### 使用流程
+### 2. 安装依赖
 
 ```bash
-# 1. 获取 Cookie（首次使用）
-python cookie_extractor.py
-# 或: python get_cookies_manual.py
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+playwright install chromium
+```
 
-# 2. 复制配置模板并填入 Cookie
+### 3. 配置 Cookie 并下载
+
+```bash
+# 自动获取 Cookie（推荐）
+python cookie_extractor.py
+
+# 或手动获取
+python get_cookies_manual.py
+
+# 若尚未有 config.yml，从模板复制
 cp config.example.yml config.yml
 
-# 3. 下载收藏夹
-python download_collects.py              # 交互选择
-python download_collects.py --all        # 下载全部收藏夹
+# 下载收藏夹
+python download_collects.py --all
+```
 
-# 4. 提取口播文案（需额外安装 vosk 依赖）
-pip install -r requirements-transcript-vosk.txt
+### 4. 提取口播文案
+
+```bash
+pip install -r requirements-transcript-vosk.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 python extract_transcript.py --backend vosk --path "./Downloaded/collects"
 ```
 
-## 📂 输出文件示例
+详细步骤见 [USAGE.md](USAGE.md)，Cookie 教程占主要篇幅。
 
-下载并转写完成后，目录结构大致如下：
+## 输出文件示例
 
 ```
 Downloaded/collects/
-├── download_log_latest.csv          # 最新下载日志（总表）
+├── download_log_latest.csv
 ├── download_log_latest.json
-├── 激励/                            # 收藏夹名称
+├── 激励/
 │   ├── 作者名_视频标题/
 │   │   ├── 作者名_视频标题_video.mp4
 │   │   ├── 作者名_视频标题_music.mp3
 │   │   ├── 作者名_视频标题_cover.jpg
-│   │   ├── 作者名_视频标题_result.json   # 元数据（标题、链接、作者等）
-│   │   └── 作者名_视频标题_transcript.txt # 口播全文
+│   │   ├── 作者名_视频标题_result.json
+│   │   └── 作者名_视频标题_transcript.txt
 │   └── ...
 └── 创业/
     └── ...
 ```
 
-`download_log_latest.csv` 便于用 Excel / Notion 做总表管理；`*_result.json` 和 `*_transcript.txt` 便于导入 Obsidian 或交给 AI 总结。
-
-## 📋 脚本说明
+## 脚本说明
 
 | 脚本 | 用途 |
 |------|------|
-| `download_collects.py` | **收藏夹下载**（本项目核心） |
+| `download_collects.py` | **收藏夹下载**（主流程） |
 | `extract_transcript.py` | 口播转文字 |
-| `DouYinCommand.py` | V1.0 稳定版（单视频/主页） |
-| `downloader.py` | V2.0 增强版（异步/自动 Cookie） |
 | `cookie_extractor.py` | Playwright 自动获取 Cookie |
 | `get_cookies_manual.py` | 手动获取 Cookie |
+| `DouYinCommand.py` | V1.0 稳定版（单视频/主页，附赠） |
+| `downloader.py` | V2.0 增强版（用户主页，附赠） |
 
 ## FAQ
 
 ### 为什么需要 Cookie？
 
-收藏夹属于登录后内容，需要通过 Cookie 识别当前账号。Cookie 仅保存在你本地的 `config.yml` 中，不会上传。
+收藏夹属于登录后内容，需要通过 Cookie 识别当前账号。详见 [USAGE.md](USAGE.md#cookie-获取与填写教程)。
 
 ### Cookie 会上传到 GitHub 吗？
 
-**不会。** 请勿提交 `config.yml`、`cookies.txt` 等私人文件。本项目已在 `.gitignore` 中忽略这些路径。
+不会。`config.yml`、`cookies.txt` 等已在 `.gitignore` 中忽略。详见 [SECURITY.md](SECURITY.md)。
 
 ### 为什么转写效果不完美？
 
-Vosk 模型较轻量，适合本地快速使用、对 Python 版本要求低。如果追求更高准确率，可使用 Faster-Whisper（需 Python 3.9+）：
+Vosk 轻量快速，适合本地使用。追求更高准确率可使用 Faster-Whisper（Python 3.9+）：
 
 ```bash
-pip install -r requirements-transcript.txt
+pip install -r requirements-transcript.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 python extract_transcript.py --backend whisper --path "./Downloaded/collects"
 ```
-
-### 下载失败怎么办？
-
-1. 检查 Cookie 是否过期，重新运行 `cookie_extractor.py`
-2. 确认收藏夹为登录账号可见
-3. 查看 `download_log_latest.json` 中的错误记录
-
-### 可以商用吗？
-
-不可以。本项目仅供学习交流，请遵守法律法规及抖音平台服务条款，尊重原作者版权。
 
 ## Roadmap
 
@@ -157,25 +151,25 @@ python extract_transcript.py --backend whisper --path "./Downloaded/collects"
 - [ ] 增加图形化界面
 - [ ] 支持一键导出选题库
 
-欢迎通过 [Issues](https://github.com/luxinzhang28-creator/Douyin-collect-downloader/issues) 提出需求或参与贡献。
-
 ## Credits
 
-本项目基于以下开源项目二次开发，感谢原作者与社区：
+本项目基于以下开源项目二次开发：
 
 - [jiji262/douyin-downloader](https://github.com/jiji262/douyin-downloader)
 - [Mu-L/douyin-downloader](https://github.com/Mu-L/douyin-downloader)
 
-## ⚠️ 免责声明
+感谢原作者与开源社区。
+
+## 免责声明
 
 - 本项目仅供**学习交流**使用
 - 请遵守相关法律法规及抖音平台服务条款
 - 不得用于商业用途或侵犯他人版权
 - 下载内容请尊重原作者权益
 
-## 📄 许可证
+## 许可证
 
-本项目采用 [MIT License](LICENSE) 开源许可证。
+[MIT License](LICENSE)
 
 ---
 

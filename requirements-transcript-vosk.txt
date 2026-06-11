@@ -1,4 +1,4 @@
-# Python 3.8 可用，无需 faster-whisper
+# Vosk 转写依赖（Python 3.8+，推荐 3.10）
 # pip install -r requirements-transcript-vosk.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 vosk>=0.3.45

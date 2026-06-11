@@ -167,6 +167,7 @@ test_download/
 cookies.pkl
 cookies_browser.txt
 cookies.txt
+cookies_backup_*.json
 dy-downloader/config/cookies.json
 
 # 个人文档（勿上传）

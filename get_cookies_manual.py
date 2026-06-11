@@ -82,7 +82,7 @@ def validate_cookies(cookies: Dict[str, str]) -> bool:
     
     return True
 
-def save_cookies(cookies: Dict[str, str], config_path: str = "config_simple.yml"):
+def save_cookies(cookies: Dict[str, str], config_path: str = "config.yml"):
     """保存Cookie到配置文件"""
     # 读取现有配置
     if os.path.exists(config_path):
@@ -118,7 +118,7 @@ def save_cookies(cookies: Dict[str, str], config_path: str = "config_simple.yml"
         }, f, ensure_ascii=False, indent=2)
     print(f"✅ Cookie备份已保存到 {backup_file}")
 
-def load_existing_cookies(config_path: str = "config_simple.yml") -> Dict[str, str]:
+def load_existing_cookies(config_path: str = "config.yml") -> Dict[str, str]:
     """加载现有的Cookie"""
     if os.path.exists(config_path):
         with open(config_path, 'r', encoding='utf-8') as f:
@@ -188,7 +188,7 @@ def main():
             if save_choice == 'y':
                 save_cookies(cookies)
                 print("\n🎉 配置完成！您现在可以运行下载器了：")
-                print("python3 downloader.py -c config_simple.yml")
+                print("python download_collects.py --all")
             else:
                 print("\n已取消保存")
         
