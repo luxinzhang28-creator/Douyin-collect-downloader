@@ -1,0 +1,11 @@
+# Speech-to-text for extract_transcript.py
+# Requires Python >= 3.9 (your dou env is 3.8, upgrade first):
+#   conda activate dou
+#   conda install python=3.10 -y
+#   pip install -r requirements-transcript.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+faster-whisper>=1.0.0
+
+# ffmpeg is required to read mp4 audio (install separately):
+#   winget install Gyan.FFmpeg
+#   conda install -c conda-forge ffmpeg

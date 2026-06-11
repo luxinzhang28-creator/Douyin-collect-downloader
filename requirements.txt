@@ -1,0 +1,28 @@
+# 1.使用国内镜像下载
+# pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 2.下载完txt还得补一下环境
+# pip install playwright rich pyyaml -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# Core dependencies
+requests==2.31.0
+pyyaml==6.0.1
+rich==13.7.0
+tqdm>=4.66.0
+
+# Async support (optional)
+aiohttp>=3.8.0
+
+# Logging
+python-json-logger==2.0.7
+
+# Development (optional)
+pytest==7.4.3
+black==23.11.0
+
+# Optional: retry
+# tenacity>=8.2.3
+
+# Other
+python-dateutil>=2.8.2
+requests-toolbelt>=1.0.0
