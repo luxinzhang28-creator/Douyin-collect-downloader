@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 200" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="920" height="200" rx="12" fill="#0f172a"/>
+  <g font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">
+    <rect x="20" y="60" width="140" height="80" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="90" y="95" font-weight="bold">–ó6Ï9</text>
+    <text x="90" y="118" fill="#94a3b8" font-size="11">	é‡ö9 / 6ÏÆ‘</text>
+
+    <path d="M165 100 H195" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="200" y="60" width="140" height="80" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="270" y="95" font-weight="bold">yÏ}</text>
+    <text x="270" y="118" fill="#94a3b8" font-size="11">Æ‘·b·ó‘·JSON</text>
+
+    <path d="M345 100 H375" stroke="#64748b" stroke-width="2"/>
+    <rect x="380" y="60" width="140" height="80" rx="10" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="450" y="95" font-weight="bold">ã­l™</text>
+    <text x="450" y="118" fill="#94a3b8" font-size="11">Vosk / Whisper</text>
+
+    <path d="M525 100 H555" stroke="#64748b" stroke-width="2"/>
+    <rect x="560" y="60" width="140" height="80" rx="10" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="630" y="95" font-weight="bold">Ó„“ú</text>
+    <text x="630" y="118" fill="#94a3b8" font-size="11">CSV · JSON · TXT</text>
+
+    <path d="M705 100 H735" stroke="#64748b" stroke-width="2"/>
+    <rect x="740" y="60" width="160" height="80" rx="10" fill="url(#g)" opacity="0.9"/>
+    <text x="820" y="95" font-weight="bold" fill="#fff">çít</text>
+    <text x="820" y="118" fill="#e0e7ff" font-size="11">Obsidian / AI / Excel</text>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <text x="460" y="30" font-family="system-ui" font-size="16" fill="#f8fafc" text-anchor="middle" font-weight="bold">	eŠ6Ï9Øï"„D™“</text>
+</svg>
